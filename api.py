@@ -8,7 +8,6 @@ app.config["DEBUG"] = True
 
 @app.route('/scrape/<path:url>', methods=["GET"])
 def scrape(url):
-
     return deck_scraper.main_app(url)
 @app.route('/')
 def home():

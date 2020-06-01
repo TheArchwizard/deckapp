@@ -5,6 +5,7 @@ import json
 from deck_app import sites
 
 
+
 """
 print("Name: " + card.name())
 print("Number in deck: " + str(d[i]))
