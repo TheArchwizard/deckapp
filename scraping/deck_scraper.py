@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 from urllib.request import urlopen
 import json
-from deck_app import sites
+from .sites import *
 
 
 
@@ -107,13 +107,13 @@ def picksite(url, soup):
     url_dct = {1: "mtgtop8.com/event", 2: "tappedout.net/mtg-decks", 3: "mtggoldfish.com"}
 
     if url_dct[1] in url:
-        return sites.mtgtop8(soup)
+        return mtgtop8(soup)
 
     elif url_dct[2] in url:
-        return sites.tappedout(soup)
+        return tappedout(soup)
 
     elif url_dct[3] in url:
-        return sites.mtggoldfish(soup)
+        return mtggoldfish(soup)
     else:
         print("Unrecognized deck url.")
 
