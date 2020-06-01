@@ -75,12 +75,12 @@ def create_json_blob(d_or_l):
     return jsonblob
 
 
-def return_big_deck(jsonblob):
+def return_big_deck(lstofblobs):
 
-    for i in range(1, len(jsonblob)):
-        jsonblob[0]["data"].extend(jsonblob[i]["data"])
+    for i in range(1, len(lstofblobs)):
+        lstofblobs[0]["data"].extend(lstofblobs[i]["data"])
 
-    return jsonblob[0]
+    return lstofblobs[0]
 
 def json_to_deck(jsonblob):
 
@@ -124,7 +124,7 @@ def main_app(url):
                 json_blob = create_json_blob(lst)
                 json_blob = post_request(json_blob)
                 lstofblobs.append(json_blob)
-            return return_big_deck(json_blob)
+            return return_big_deck(lstofblobs)
 
         else:
             json_blob = create_json_blob(dct)
