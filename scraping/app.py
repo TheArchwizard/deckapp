@@ -5,7 +5,6 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = False
 
 
-
 @app.route('/scrape/<path:url>', methods=["GET"])
 def scrape(url):
     return main_app(url)

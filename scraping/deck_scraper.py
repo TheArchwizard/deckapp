@@ -75,31 +75,22 @@ def create_json_blob(d_or_l):
     return jsonblob
 
 
+def return_big_deck(jsonblob):
+
+    for i in range(1, len(jsonblob)):
+        jsonblob[0]["data"].extend(jsonblob[i]["data"])
+
+    return jsonblob[0]
 
 def json_to_deck(jsonblob):
 
-
     deck = []
 
-    if type(jsonblob) == list:
-        for i in range(1,len(jsonblob)):
-            jsonblob[0]["data"].extend(jsonblob[i]["data"])
+    for i in jsonblob["data"]:
 
-
-        for card in jsonblob[0]["data"]:
-            c = Card(card["name"], card["type_line"], card["cmc"])
-            deck.append(c)
-            c.print_card()
-        print(len(deck))
-        print(type(jsonblob[0]))
-        return jsonblob[0]
-
-    else:
-        for i in jsonblob["data"]:
-
-            c = Card(i["name"], i["type_line"], i["cmc"])
-            deck.append(c)
-            c.print_card()
+        c = Card(i["name"], i["type_line"], i["cmc"])
+        deck.append(c)
+        c.print_card()
 
 
 def picksite(url, soup):
@@ -119,8 +110,8 @@ def picksite(url, soup):
 
 
 def main_app(url):
-    try:
 
+    try:
         page = urlopen(url)
         soup = BeautifulSoup(page, 'lxml')
         dct = picksite(url, soup)
@@ -129,18 +120,16 @@ def main_app(url):
             lsts = chunk(dct)
             lstofblobs = []
             for lst in lsts:
+
                 json_blob = create_json_blob(lst)
                 json_blob = post_request(json_blob)
                 lstofblobs.append(json_blob)
-            return json_to_deck(lstofblobs)
-
-
+            return return_big_deck(json_blob)
 
         else:
             json_blob = create_json_blob(dct)
             json_blob = post_request(json_blob)
 
-            json_to_deck(json_blob)
             return json_blob
 
     except ValueError:
@@ -156,8 +145,6 @@ def test():
         dct = picksite(url, soup)
 
 
-
-
         if len(dct) > 75:
             lsts = chunk(dct)
             lstofblobs = []
@@ -166,17 +153,13 @@ def test():
                 json_blob = create_json_blob(lst)
                 json_blob = post_request(json_blob)
                 lstofblobs.append(json_blob)
-            return json_to_deck(lstofblobs)
-
-
+            return return_big_deck(json_blob)
 
         else:
             json_blob = create_json_blob(dct)
             json_blob = post_request(json_blob)
 
-            json_to_deck(json_blob)
             return json_blob
-
 
     except ValueError:
         print("Invalid url.")
