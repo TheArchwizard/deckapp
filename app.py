@@ -13,4 +13,5 @@ def scrape(url):
 def home():
     return "<h1> Welcome </h1>"
 
-app.run()
+if __name__ == '__main__':
+    app.run()
