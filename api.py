@@ -5,7 +5,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 @app.route('/<path:url>', methods=["GET"])
-def home(url):
+def main(url):
 
     return deck_scraper.main_app(url)
 
