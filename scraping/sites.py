@@ -28,7 +28,7 @@ def tappedout(soup):
     for el in soup:
         name = el["data-name"]
         qty = el["data-qty"]
-        dct[name] = qty
+        dct[name] = int(qty)
 
     return dct
 
@@ -42,6 +42,7 @@ def mtggoldfish(soup):
 
     for tag in soup2:
         card = tag.getText()
+        card = card.strip("\n")
         names.append(card)
 
     for i in soup1:
