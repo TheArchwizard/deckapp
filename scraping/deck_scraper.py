@@ -92,7 +92,7 @@ def json_to_deck(jsonblob):
         deck.append(c)
         c.print_card()
 
-def names_nums(url):
+def names_dct(url):
     page = urlopen(url)
     soup = BeautifulSoup(page, 'lxml')
     dct = picksite(url, soup)

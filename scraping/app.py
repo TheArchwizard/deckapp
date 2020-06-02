@@ -7,7 +7,7 @@ app.config["DEBUG"] = False
 
 @app.route("/names/<path:url>", methods=["GET"])
 def names_nums(url):
-    return names_nums(url)
+    return names_dct(url)
 
 
 @app.route("/scrape/<path:url>", methods=["GET"])
