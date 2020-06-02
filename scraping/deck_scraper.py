@@ -92,6 +92,12 @@ def json_to_deck(jsonblob):
         deck.append(c)
         c.print_card()
 
+def names_nums(url):
+    page = urlopen(url)
+    soup = BeautifulSoup(page, 'lxml')
+    dct = picksite(url, soup)
+    return dct
+
 
 def picksite(url, soup):
 
@@ -144,7 +150,6 @@ def test():
         soup = BeautifulSoup(page, 'lxml')
         dct = picksite(url, soup)
 
-
         if len(dct) > 75:
             lsts = chunk(dct)
             lstofblobs = []
@@ -153,7 +158,7 @@ def test():
                 json_blob = create_json_blob(lst)
                 json_blob = post_request(json_blob)
                 lstofblobs.append(json_blob)
-            return return_big_deck(json_blob)
+            return return_big_deck(lstofblobs)
 
         else:
             json_blob = create_json_blob(dct)
