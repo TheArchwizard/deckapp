@@ -11,13 +11,14 @@ def names_nums(url):
     deck = names_dct(url)
     jsondct = {}
     lst = []
-    for name in deck.keys():
+
+    for k,v in deck.items():
         dct = {}
-        for num in deck.values():
-            dct["name"] = name
-            dct["num"] = num
-            lst.append(dct)
-    
+
+        dct["name"] = k
+        dct["num"] = v
+        lst.append(dct)
+
     jsondct["values"] = lst
     return jsondct
 
