@@ -5,20 +5,6 @@ import json
 from .sites import *
 
 
-
-"""
-print("Name: " + card.name())
-print("Number in deck: " + str(d[i]))
-print("Typeline: " + card.type_line())
-print("Converted mana cost: " + str(card.cmc()))
-print("\n")
-print("--- %s seconds ---" % (time.time() - start))
-plt.figure(figsize=(8, 5))
-plt.pie(d.values(), labels=list(d.keys()), autopct="%.1f%%")
-plt.show()
-
-"""
-
 class Card:
 
     def __init__(self,name,type_line,cmc):
@@ -96,6 +82,7 @@ def names_dct(url):
     page = urlopen(url)
     soup = BeautifulSoup(page, 'lxml')
     dct = picksite(url, soup)
+    dct = json.loads(dct)
     return dct
 
 
@@ -130,6 +117,7 @@ def main_app(url):
                 json_blob = create_json_blob(lst)
                 json_blob = post_request(json_blob)
                 lstofblobs.append(json_blob)
+
             return return_big_deck(lstofblobs)
 
         else:
