@@ -8,7 +8,18 @@ app.config["DEBUG"] = False
 @app.route("/names/<path:url>", methods=["GET"])
 def names_nums(url):
 
-    return names_dct(url)
+    deck = names_dct(url)
+    jsondct = {}
+    lst = []
+    for name in deck.keys():
+        dct = {}
+        for num in deck.values():
+            dct["name"] = name
+            dct["num"] = num
+            lst.append(dct)
+    
+    jsondct["values"] = lst
+    return jsondct
 
 @app.route("/scrape/<path:url>", methods=["GET"])
 def scrape_all(url):
