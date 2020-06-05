@@ -82,7 +82,6 @@ def names_dct(url):
     page = urlopen(url)
     soup = BeautifulSoup(page, 'lxml')
     dct = picksite(url, soup)
-    dct = json.loads(dct)
     return dct
 
 
