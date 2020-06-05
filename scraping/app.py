@@ -14,9 +14,8 @@ def names_nums(url):
 
     for k,v in deck.items():
         dct = {}
-
         dct["name"] = k
-        dct["num"] = v
+        dct["num"] = str(v)
         lst.append(dct)
 
     jsondct["values"] = lst
