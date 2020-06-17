@@ -182,5 +182,3 @@ def test():
     except ValueError:
         print("Invalid url.")
 
-
-test()
