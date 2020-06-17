@@ -46,7 +46,6 @@ def post_request(jsonblob):
 
     api_url = "https://api.scryfall.com/cards/collection"
     response = requests.post(api_url, json=jsonblob)
-    print(response.status_code)
     if response.status_code == 200:
         print(json.loads(response.content.decode("utf-8")))
         return json.loads(response.content.decode("utf-8"))
@@ -106,7 +105,7 @@ def names_dct(url):
 
 def picksite(url, soup):
 
-    url_dct = {1: "mtgtop8.com/event", 2: "tappedout.net/mtg-decks", 3: "mtggoldfish.com", 4: "moxfield.com/decks"}
+    url_dct = {1: "mtgtop8.com/event", 2: "tappedout.net/mtg-decks", 3: "mtggoldfish.com"}
 
     if url_dct[1] in url:
         return mtgtop8(soup)
