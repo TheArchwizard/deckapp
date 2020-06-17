@@ -19,6 +19,13 @@ class Card:
         return "{}, {}, {}".format(self.name,self.type_line,self.cmc)
 
 def chunk(d):
+
+
+    """
+    function is called when the dictionary's length exceeds 75 unique cards
+    :param d:
+    :return:
+    """
     lists = []
     newlist = []
     dictlst = list(d.keys())
@@ -46,9 +53,15 @@ def post_request(jsonblob):
     else:
         return None
 
-def create_json_blob(d_or_l):
+def create_json_blob(d):
 
-    card_names = list(d_or_l)
+    """
+    serialize dictionary of cards into json to be sent to Scryfall API
+    :param d:
+    :return:
+    """
+
+    card_names = list(d)
     jsonblob = {}
 
     list_of_dicts = []
@@ -62,6 +75,12 @@ def create_json_blob(d_or_l):
 
 
 def return_big_deck(lstofblobs):
+
+    """
+    returns
+    :param lstofblobs:
+    :return:
+    """
 
     for i in range(1, len(lstofblobs)):
         lstofblobs[0]["data"].extend(lstofblobs[i]["data"])
@@ -87,7 +106,7 @@ def names_dct(url):
 
 def picksite(url, soup):
 
-    url_dct = {1: "mtgtop8.com/event", 2: "tappedout.net/mtg-decks", 3: "mtggoldfish.com"}
+    url_dct = {1: "mtgtop8.com/event", 2: "tappedout.net/mtg-decks", 3: "mtggoldfish.com", 4: "moxfield.com/decks"}
 
     if url_dct[1] in url:
         return mtgtop8(soup)
@@ -97,6 +116,8 @@ def picksite(url, soup):
 
     elif url_dct[3] in url:
         return mtggoldfish(soup)
+    elif url_dct[4] in url:
+        return moxfield(soup)
     else:
         print("Unrecognized deck url.")
 

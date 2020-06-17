@@ -3,6 +3,13 @@ This file contains webscraping functions that are specific to certain sites
 """
 
 def mtgtop8(soup):
+
+
+    """
+    needs to be fixed
+    :param soup:
+    :return:
+    """
     names = []
     numbers = []
 
@@ -56,3 +63,20 @@ def mtggoldfish(soup):
 
     return dct
 
+def moxfield(soup):
+
+    soup1 = soup.findAll("a", {"class": "cursor-pointer text-body"})
+    soup2 = soup.findAll("td", {"class": "text-right"})
+
+    names = []
+    nums = []
+
+    for tag in soup1:
+        card = tag.getText()
+        names.append(card)
+
+    for tag in soup2:
+        number = tag.getText()
+        nums.append(number)
+
+    return dict(zip(names,nums))
