@@ -46,6 +46,7 @@ def post_request(jsonblob):
 
     api_url = "https://api.scryfall.com/cards/collection"
     response = requests.post(api_url, json=jsonblob)
+    print(response.status_code)
     if response.status_code == 200:
         print(json.loads(response.content.decode("utf-8")))
         return json.loads(response.content.decode("utf-8"))

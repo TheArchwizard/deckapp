@@ -21,6 +21,7 @@ def names_nums(url):
         lst.append(dct)
 
     jsondct["values"] = lst
+    print(jsondct)
     return jsondct
 
 @app.route("/scrape/<path:url>", methods=["GET"])
