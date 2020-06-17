@@ -46,7 +46,7 @@ def post_request(jsonblob):
 
     api_url = "https://api.scryfall.com/cards/collection"
     response = requests.post(api_url, json=jsonblob)
-
+    print(response.status_code)
     if response.status_code == 200:
         print(json.loads(response.content.decode("utf-8")))
         return json.loads(response.content.decode("utf-8"))
@@ -116,10 +116,16 @@ def picksite(url, soup):
 
     elif url_dct[3] in url:
         return mtggoldfish(soup)
-    elif url_dct[4] in url:
-        return moxfield(soup)
+
     else:
         print("Unrecognized deck url.")
+
+    """
+      elif url_dct[4] in url:
+        return moxfield(soup)
+    """
+
+
 
 
 def main_app(url):
@@ -178,3 +184,4 @@ def test():
         print("Invalid url.")
 
 
+test()

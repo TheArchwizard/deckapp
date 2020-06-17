@@ -1,6 +1,8 @@
 import flask
 from .deck_scraper import *
 
+
+
 app = flask.Flask(__name__)
 app.config["DEBUG"] = False
 

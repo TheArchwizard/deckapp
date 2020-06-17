@@ -63,6 +63,7 @@ def mtggoldfish(soup):
 
     return dct
 
+"""
 def moxfield(soup):
 
     soup1 = soup.findAll("a", {"class": "cursor-pointer text-body"})
@@ -80,3 +81,4 @@ def moxfield(soup):
         nums.append(number)
 
     return dict(zip(names,nums))
+"""
