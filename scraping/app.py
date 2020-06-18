@@ -25,8 +25,9 @@ def names_nums(url):
     return jsondct
 
 
-@app.route("/dict/<string:dct>", methods=["GET"])
+@app.route("/dict/<json:dct>", methods=["GET"])
 def dict_to_blob(dct):
+
     return create_json_blob(dct)
 
 @app.route("/scrape/<path:url>", methods=["GET"])
