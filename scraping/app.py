@@ -24,6 +24,11 @@ def names_nums(url):
     print(jsondct)
     return jsondct
 
+
+@app.route("/dict/<string:dct>", methods=["GET"])
+def dict_to_blob(dct):
+    return create_json_blob(dct)
+
 @app.route("/scrape/<path:url>", methods=["GET"])
 def scrape_all(url):
     return main_app(url)
