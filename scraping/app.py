@@ -1,11 +1,11 @@
 import flask
 from .deck_scraper import *
-
+from flask_cors import CORS
 
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = False
-
+CORS(app)
 
 @app.route("/names/<path:url>", methods=["GET"])
 def names_nums(url):
@@ -25,7 +25,7 @@ def names_nums(url):
     return jsondct
 
 
-@app.route("/dict/<uuid:dct>", methods=["GET"])
+@app.route("/dict/<string:dct>", methods=["GET"])
 def dict_to_blob(dct):
 
     return create_json_blob(dct)
