@@ -7,16 +7,15 @@ from .sites import *
 
 class Card:
 
-    def __init__(self,name,type_line,cmc):
+    def __init__(self,name,quantity):
         self.name = name
-        self.type_line = type_line
-        self.cmc = cmc
+        self.quantity = quantity
 
     def print_card(self):
-        print("{}, {}, {}".format(self.name,self.type_line,self.cmc))
+        print("{}: {}".format(self.quantity, self.name))
 
     def return_card(self):
-        return "{}, {}, {}".format(self.name,self.type_line,self.cmc)
+        return "{}: {}".format(self.quantity, self.name)
 
 def chunk(d):
 
@@ -91,13 +90,14 @@ def json_to_deck(jsonblob):
 
     deck = []
 
-    for i in jsonblob["data"]:
+    for i in jsonblob["values"]:
 
-        c = Card(i["name"], i["type_line"], i["cmc"])
+        c = Card(i["name"], i["num"])
         deck.append(c)
-        c.print_card()
+        return deck
 
 def names_dct(url):
+
     page = urlopen(url)
     soup = BeautifulSoup(page, 'lxml')
     dct = picksite(url, soup)
@@ -124,9 +124,6 @@ def picksite(url, soup):
       elif url_dct[4] in url:
         return moxfield(soup)
     """
-
-
-
 
 def main_app(url):
 

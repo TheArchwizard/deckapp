@@ -14,14 +14,13 @@ def names_nums(url):
     jsondct = {}
     lst = []
 
-    for k,v in deck.items():
+    for name,quantity in deck.items():
         dct = {}
-        dct["name"] = k
-        dct["num"] = str(v)
+        dct["name"] = name
+        dct["num"] = str(quantity)
         lst.append(dct)
 
     jsondct["values"] = lst
-    print(jsondct)
     return jsondct
 
 
@@ -35,7 +34,7 @@ def scrape_all(url):
     return main_app(url)
 @app.route("/")
 def home():
-    return "<h1> Welcome </h1>"
+    return "<h1> Welcome to the deck app.</h1>"
 
 if __name__ == '__main__':
     app.run()
