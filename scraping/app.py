@@ -1,9 +1,9 @@
-import flask
+from flask import render_template, request, Flask
 from .deck_scraper import *
 from flask_cors import CORS
 
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 app.config["DEBUG"] = False
 CORS(app)
 
@@ -24,6 +24,7 @@ def names_nums(url):
     return jsondct
 
 
+
 @app.route("/dict/<string:dct>", methods=["GET"])
 def dict_to_blob(dct):
 
@@ -34,7 +35,7 @@ def scrape_all(url):
     return main_app(url)
 @app.route("/")
 def home():
-    return "<h1> Welcome to the deck app.</h1>"
+    return render_template("index.html")
 
 if __name__ == '__main__':
     app.run()

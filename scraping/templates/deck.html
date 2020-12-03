@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Decklist</title>
+</head>
+<body>
+    {% for quantity, name in deck.items()%}
+        <p> {{key}} : {{value}}</p>
+    {% endfor %}
+</body>
+</html>
