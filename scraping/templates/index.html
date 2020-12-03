@@ -15,15 +15,12 @@
         </form>
         <p>This site takes a url a for Magic: The Gathering deck and returns the associated decklist along with all of its data.</p>
         <p>Example: https://www.mtggoldfish.com/archetype/modern-death-s-shadow#paper</p>
-        <p>Currently supported sites tappedout.net and mtggoldfish.com</p>
+        <p>Currently supported sites mtggoldfish.com</p>
     </div>
 
-
-    <p id = "deck">
-        <span id = "num"></span>
-        <span id = "name"></span>
-    </p>
-
+    <div class= "d-flex flex-column align-items-center description">
+            <p id= "deckdata"></p>
+    </div>
 
     <script>
       const f = document.getElementById('form');
@@ -34,17 +31,11 @@
         event.preventDefault();
         const response = await fetch(url + q.value);
         const data = await response.json();
+        const newdata = JSON.stringify(data);
         console.log(data);
-        const {name, num} = data
+        console.log(newdata);
 
-        document.getElementById("name").textContent = name;
-        document.getElementById("num").textContent = num;
-
-        var x = document.getElementById("deck");
-
-        if (x.style.display === "none"){
-            x.style.display = "block";
-        }
+        document.getElementById("deckdata").textContent = newdata;
       }
 
       f.addEventListener('submit', submitted);

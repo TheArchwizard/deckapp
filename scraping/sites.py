@@ -5,7 +5,7 @@ This file contains webscraping functions that are specific to certain websites
 def mtgtop8(soup):
 
     """
-    Scrapes card names and quantities from tappedout.net and returns them as a dictionary.
+    Scrapes card names and quantities from mtgtop8.com and returns them as a dictionary.
     This function works in the test environment and scrapes data properly, but breaks when
     the data is sent to the Scryfall API. Fix later.
     :param soup:
@@ -32,7 +32,8 @@ def mtgtop8(soup):
 def tappedout(soup):
 
     """
-    Scrapes card names and quantities from tappedout.net and returns them as a dictionary.
+    Scrapes card names and quantities from tappedout.net and returns them as a dictionary. This function
+    was working great up until tappedout.net started blocking the scraper.
     :param soup:
     :return dict:
     """

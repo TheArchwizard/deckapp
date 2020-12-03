@@ -43,6 +43,13 @@ def chunk(d):
 
 def post_request(jsonblob):
 
+    """
+    Sends properly formatted jsonblob to the Scryfall API to retrieve more information
+    about the deck
+    :param jsonblob:
+    :return:
+    """
+
     api_url = "https://api.scryfall.com/cards/collection"
     response = requests.post(api_url, json=jsonblob)
     print(response.status_code)
@@ -152,31 +159,4 @@ def main_app(url):
     except ValueError:
         print("Invalid url.")
 
-def test():
-
-
-    try:
-        url = input("Enter a url: ")
-        page = urlopen(url)
-        soup = BeautifulSoup(page, 'lxml')
-        dct = picksite(url, soup)
-
-        if len(dct) > 75:
-            lsts = chunk(dct)
-            lstofblobs = []
-            for lst in lsts:
-
-                json_blob = create_json_blob(lst)
-                json_blob = post_request(json_blob)
-                lstofblobs.append(json_blob)
-            return return_big_deck(lstofblobs)
-
-        else:
-            json_blob = create_json_blob(dct)
-            json_blob = post_request(json_blob)
-
-            return json_blob
-
-    except ValueError:
-        print("Invalid url.")
 
