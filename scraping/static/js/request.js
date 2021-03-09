@@ -6,6 +6,13 @@ var averagecmc = 0;
 
 async function submitted(event)
 {
+    const myNode = document.getElementById("main");
+
+    while (myNode.firstChild) 
+    {
+    myNode.removeChild(myNode.lastChild);
+    }
+    
     event.preventDefault()
     const response = await fetch(url + q.value);
 
