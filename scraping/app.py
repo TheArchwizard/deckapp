@@ -32,7 +32,7 @@ def upload_file():
 
             file = request.files["text"]
 
-            return redirect(request.url)
+            return redirect("index.html")
 
 
 
