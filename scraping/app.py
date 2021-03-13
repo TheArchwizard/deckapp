@@ -23,17 +23,6 @@ def names_nums(url):
     jsondct["values"] = lst
     return jsondct
 
-@app.route("/", methods=["GET", "POST"])
-def upload_file():
-
-    if request.method == "POST":
-
-        if request.files:
-
-            file = request.files["text"]
-
-            return redirect(request.url)
-
 
 
 
@@ -45,9 +34,20 @@ def dict_to_blob(dct):
 @app.route("/scrape/<path:url>", methods=["GET"])
 def scrape_all(url):
     return main_app(url)
-@app.route("/")
+
+@app.route("/", methods=["GET", "POST"])
 def home():
     return render_template("index.html")
+
+def upload_file():
+
+    if request.method == "POST":
+
+        if request.files:
+
+            file = request.files["text"]
+
+            return redirect(request.url)
 
 if __name__ == '__main__':
     app.run()
