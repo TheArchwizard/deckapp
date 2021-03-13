@@ -35,7 +35,6 @@ async function submitted(event)
         for(y in cleaneddata2[x]){
         console.log(y.card_faces);
         }
-
         }
 
     }
