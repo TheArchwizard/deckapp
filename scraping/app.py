@@ -39,6 +39,7 @@ def scrape_all(url):
 def home():
     return render_template("index.html")
 
+@app.route("/", methods=["GET", "POST"])
 def upload_file():
 
     if request.method == "POST":
