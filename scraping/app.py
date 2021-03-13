@@ -23,7 +23,7 @@ def names_nums(url):
     jsondct["values"] = lst
     return jsondct
 
-@app.route("/upload-file", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def upload_file():
 
     if request.method == "POST":
@@ -32,7 +32,7 @@ def upload_file():
 
             file = request.files["text"]
 
-            return redirect("index.html")
+            return redirect(request.url)
 
 
 
