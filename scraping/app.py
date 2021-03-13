@@ -1,4 +1,4 @@
-from flask import render_template, request, Flask
+from flask import render_template, request, Flask, redirect
 from .deck_scraper import *
 from flask_cors import CORS
 
@@ -22,6 +22,18 @@ def names_nums(url):
 
     jsondct["values"] = lst
     return jsondct
+
+@app.route("/upload-file", methods=["GET", "POST"])
+def upload_file():
+
+    if request.method == "POST":
+
+        if request.files:
+
+            file = request.files["text"]
+
+            return redirect(request.url)
+
 
 
 
