@@ -2,12 +2,13 @@ from bs4 import BeautifulSoup
 import requests
 from urllib.request import urlopen
 import json
+from numba import jit
 from .sites import *
 
 
 class Card:
 
-    def __init__(self,name,quantity):
+    def __init__(self, name, quantity):
         self.name = name
         self.quantity = quantity
 
@@ -17,9 +18,9 @@ class Card:
     def return_card(self):
         return "{}: {}".format(self.quantity, self.name)
 
+
+@jit(nopython=True)
 def chunk(d):
-
-
     """
     function is called when the dictionary's length exceeds 75 unique cards
     :param d:
@@ -28,7 +29,7 @@ def chunk(d):
     lists = []
     newlist = []
     dictlst = list(d.keys())
-    for i in range(0,len(dictlst)):
+    for i in range(0, len(dictlst)):
 
         if i != 0 and i % 75 == 0:
             lists.append(newlist)
@@ -37,12 +38,11 @@ def chunk(d):
 
         newlist.append(dictlst[i])
 
-
     return lists
 
 
+@jit(nopython=True)
 def post_request(jsonblob):
-
     """
     Sends properly formatted jsonblob to the Scryfall API to retrieve more information
     about the deck
@@ -59,8 +59,9 @@ def post_request(jsonblob):
     else:
         return None
 
-def create_json_blob(d):
 
+@jit(nopython=True)
+def create_json_blob(d):
     """
     serialize dictionary of cards into json to be sent to Scryfall API
     :param d:
@@ -80,8 +81,8 @@ def create_json_blob(d):
     return jsonblob
 
 
+@jit(nopython=True)
 def return_big_deck(lstofblobs):
-
     """
     returns
     :param lstofblobs:
@@ -93,6 +94,8 @@ def return_big_deck(lstofblobs):
 
     return lstofblobs[0]
 
+
+@jit(nopython=True)
 def json_to_deck(jsonblob):
 
     deck = []
@@ -103,6 +106,8 @@ def json_to_deck(jsonblob):
         deck.append(c)
         return deck
 
+
+@jit(nopython=True)
 def names_dct(url):
 
     page = urlopen(url)
@@ -111,9 +116,11 @@ def names_dct(url):
     return dct
 
 
+@jit(nopython=True)
 def picksite(url, soup):
 
-    url_dct = {1: "mtgtop8.com/event", 2: "tappedout.net/mtg-decks", 3: "mtggoldfish.com"}
+    url_dct = {1: "mtgtop8.com/event",
+               2: "tappedout.net/mtg-decks", 3: "mtggoldfish.com"}
 
     if url_dct[1] in url:
         return mtgtop8(soup)
@@ -132,6 +139,8 @@ def picksite(url, soup):
         return moxfield(soup)
     """
 
+
+@jit(nopython=True)
 def main_app(url):
 
     try:
