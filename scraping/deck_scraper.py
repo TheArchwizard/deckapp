@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 from urllib.request import urlopen
 import json
-from numba import jit
+from numba import njit
 from .sites import *
 
 
@@ -19,7 +19,7 @@ class Card:
         return "{}: {}".format(self.quantity, self.name)
 
 
-@jit(nopython=True)
+@njit
 def chunk(d):
     """
     function is called when the dictionary's length exceeds 75 unique cards
@@ -41,7 +41,7 @@ def chunk(d):
     return lists
 
 
-@jit(nopython=True)
+@njit
 def post_request(jsonblob):
     """
     Sends properly formatted jsonblob to the Scryfall API to retrieve more information
@@ -60,7 +60,7 @@ def post_request(jsonblob):
         return None
 
 
-@jit(nopython=True)
+@njit
 def create_json_blob(d):
     """
     serialize dictionary of cards into json to be sent to Scryfall API
@@ -81,7 +81,7 @@ def create_json_blob(d):
     return jsonblob
 
 
-@jit(nopython=True)
+@njit
 def return_big_deck(lstofblobs):
     """
     returns
@@ -95,7 +95,7 @@ def return_big_deck(lstofblobs):
     return lstofblobs[0]
 
 
-@jit(nopython=True)
+@njit
 def json_to_deck(jsonblob):
 
     deck = []
@@ -107,7 +107,7 @@ def json_to_deck(jsonblob):
         return deck
 
 
-@jit(nopython=True)
+@njit
 def names_dct(url):
 
     page = urlopen(url)
@@ -116,7 +116,7 @@ def names_dct(url):
     return dct
 
 
-@jit(nopython=True)
+@njit
 def picksite(url, soup):
 
     url_dct = {1: "mtgtop8.com/event",
@@ -140,7 +140,7 @@ def picksite(url, soup):
     """
 
 
-@jit(nopython=True)
+@njit
 def main_app(url):
 
     try:
